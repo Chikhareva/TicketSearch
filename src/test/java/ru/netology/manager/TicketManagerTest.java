@@ -10,11 +10,15 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 class TicketManagerTest {
     TicketRepository repository = new TicketRepository();
     TicketManager manager = new TicketManager(repository);
-    private Ticket first = new Ticket(1, 5200, "LED", "MOW", 320);
+    private Ticket first = new Ticket(1, 5200, "LED", "MOW", 50);
     private Ticket second = new Ticket(2, 13000, "DME", "KJA", 230);
-    private Ticket third = new Ticket(3, 25000, "MOW", "OVB", 450);
+    private Ticket third = new Ticket(3, 25000, "LED", "MOW", 50);
     private Ticket forth = new Ticket(4, 12000, "LED", "ROV", 200);
     private Ticket fifth = new Ticket(5, 25000, "LED", "TOF", 180);
+    private Ticket sixth= new Ticket(6,13500,"LED","MOW",50);
+    private Ticket seventh=new Ticket(7,15480,"MOW","OVB",180);
+
+
 
     @BeforeEach
     public void setUp() {
@@ -23,11 +27,13 @@ class TicketManagerTest {
         manager.add(third);
         manager.add(forth);
         manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
     }
 
     @Test
     public void shouldTicketsFitSearchMoreOne() {
-        Ticket[] expected = new Ticket[]{first};
+        Ticket[] expected = new Ticket[]{first,sixth,third};
         Ticket[] actual = manager.finAll("LED", "MOW");
         assertArrayEquals(expected, actual);
     }

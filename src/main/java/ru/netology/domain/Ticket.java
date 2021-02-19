@@ -8,24 +8,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class Ticket implements Comparable {
+public class Ticket implements Comparable<Ticket> {
     private int id;
     private int price;
     private String departure;
     private String arrival;
     private int duration;
 
-    @Override
-    public int compareTo(Object o) {
-        Ticket ticket = (Ticket) o;
-        return price - ticket.price;
-    }
 
     public boolean matches(String fromAirport, String toAirport) {
         if (this.getDeparture().equalsIgnoreCase(fromAirport) && this.getArrival().equalsIgnoreCase(toAirport)) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        Ticket ticket = (Ticket) o;
+        return price-ticket.price;
     }
 }
 
